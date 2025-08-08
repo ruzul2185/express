@@ -9,6 +9,7 @@ const sendData = (request, response) => {
   return response.status(200).json({ message: "Backend is working!!" });
 };
 
+// This is to test git
 app.get("/", sendData);
 app.post("/user", (req, res) => {
   const { email, password } = req.body;
