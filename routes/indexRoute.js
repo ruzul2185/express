@@ -1,5 +1,10 @@
 import { Router } from "express";
-import { sendData, postData } from "../controller/indexController.js";
+import {
+  sendData,
+  postData,
+  patchData,
+  deleteUser,
+} from "../controller/indexController.js";
 
 const router = Router();
 
@@ -8,6 +13,10 @@ router.get("/", sendData);
 
 //  Post request
 router.post("/", postData);
+
+router.put("/", patchData);
+
+router.delete("/:id", deleteUser);
 
 // PUT, PATCH, DELETE
 
