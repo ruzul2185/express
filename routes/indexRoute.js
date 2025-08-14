@@ -4,12 +4,15 @@ import {
   postData,
   patchData,
   deleteUser,
+  getSingleUser,
 } from "../controller/indexController.js";
 
 const router = Router();
 
 // get request
 router.get("/", sendData);
+
+router.get("/:id", getSingleUser);
 
 //  Post request
 router.post("/", postData);

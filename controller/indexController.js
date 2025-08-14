@@ -12,6 +12,19 @@ export const sendData = async (request, response) => {
   return response.status(200).json({ data: list });
 };
 
+export const getSingleUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findOne({ _id: id });
+    if (!user) {
+      return res.status(400);
+    }
+    return res.status(200).json({ user });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const postData = async (req, res) => {
   try {
     // Checking if the body is empty or not
