@@ -1,4 +1,5 @@
 import { User } from "../models/userModel.js";
+import bcrypt from "bcrypt";
 
 // Fucntion for get request on route "/"
 export const sendData = async (request, response) => {
@@ -54,7 +55,12 @@ export const postData = async (req, res) => {
         .json({ status: "failed", error: "This user already exists!" });
     }
 
-    const responseFromMongodb = await User.create({ email, password });
+    const newPassword = await bcrypt.hash(password, 10);
+
+    const responseFromMongodb = await User.create({
+      email,
+      password: newPassword,
+    });
 
     // If all cases are passed, give a positive response
     return res

@@ -1,6 +1,7 @@
 import { config } from "dotenv";
 config();
 import Express from "express";
+import authRoute from "./routes/authRoute.js";
 import indexRoute from "./routes/indexRoute.js";
 import { databaseConnection } from "./utils/database.js";
 
@@ -10,6 +11,7 @@ databaseConnection();
 // Middleware to parse string to json/obj
 app.use(Express.json());
 
+app.use("/auth", authRoute);
 app.use("/", indexRoute);
 
 // Listener to listen to incoming requests
