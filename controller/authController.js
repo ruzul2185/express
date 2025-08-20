@@ -1,5 +1,6 @@
 import { User } from "../models/userModel.js";
 import bcrypt from "bcrypt";
+import jsonwebtoken from "jsonwebtoken";
 
 export const login = async (request, response) => {
   try {
@@ -25,9 +26,18 @@ export const login = async (request, response) => {
         .json({ error: "email or password is wrong!" });
     }
 
+    const payload = {
+      id: user._id,
+      email: user.email,
+    };
+
+    const token = jsonwebtoken.sign(payload, process.env.ACCESS_TOKEN_KEY, {
+      expiresIn: "10h",
+    });
+
     return response
       .status(200)
-      .json({ message: "User successfully authenticated!" });
+      .json({ message: "User successfully authenticated!", token });
   } catch (error) {
     console.log(error);
   }

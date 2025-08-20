@@ -7,10 +7,12 @@ import {
   getSingleUser,
 } from "../controller/indexController.js";
 
+import isAutheticated from "../middleware/isAuthenticated.js";
+
 const router = Router();
 
 // get request
-router.get("/", sendData);
+router.get("/", isAutheticated, sendData);
 
 router.get("/:id", getSingleUser);
 
